@@ -16,7 +16,7 @@ public class SuperformulaController
 	private int radius;
 
 	public SuperformulaController(
-		SuperformulaModel model, SuperformulaView view)
+			SuperformulaModel model, SuperformulaView view)
 	{
 		this.model = model;
 		this.view = view;
@@ -50,7 +50,7 @@ public class SuperformulaController
 		{
 			wikipediaDemosIndex = 0;
 			model.setParameters(
-				SuperformulaModel.WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
+					SuperformulaModel.WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
 		}
 		else
 		{
@@ -98,9 +98,9 @@ public class SuperformulaController
 	private double getR(double phi)
 	{
 		double r = Math.pow(Math.abs(
-			Math.pow(Math.abs(Math.cos(model.getM() * phi / 4.0) / model.getA()), model.getN2())
-			+ Math.pow(Math.abs(Math.sin(model.getM() * phi / 4.0) / model.getB()), model.getN3())),
-			-1.0 / model.getN1());
+				Math.pow(Math.abs(Math.cos(model.getM() * phi / 4.0) / model.getA()), model.getN2())
+				+ Math.pow(Math.abs(Math.sin(model.getM() * phi / 4.0) / model.getB()), model.getN3())),
+				-1.0 / model.getN1());
 		return r;
 	}
 
@@ -114,7 +114,7 @@ public class SuperformulaController
 				wikipediaDemosIndex = 0;
 			}
 			model.setParameters(
-				SuperformulaModel.WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
+					SuperformulaModel.WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
 		}
 		else
 		{
@@ -135,7 +135,7 @@ public class SuperformulaController
 					break;
 				default:
 					throw new AssertionError(String.format(
-						"Unknown parameter to mutate: ", parameterToMutate));
+							"Unknown parameter to mutate: ", parameterToMutate));
 			}
 		}
 	}
@@ -145,8 +145,8 @@ public class SuperformulaController
 		if (min >= max || value < min || value > max)
 		{
 			throw new IllegalArgumentException(String.format(
-				"Invalid mutation values: {value=%d, min=%d, max=%d",
-				value, min, max));
+					"Invalid mutation values: {value=%d, min=%d, max=%d",
+					value, min, max));
 		}
 		if (value == min)
 		{

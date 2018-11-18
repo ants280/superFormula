@@ -69,24 +69,24 @@ public class SuperformulaFrame extends JFrame
 
 		controller.update();
 	}
-    
-    public void init()
-    {
+
+	public void init()
+	{
 		this.setJMenuBar(createMainMenu());
 		this.add(this.initMainPanel());
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		this.pack();
 		this.setResizable(false);
-    }
+	}
 
-    private JPanel initMainPanel()
-    {
-        JPanel mainPanel = new JPanel(new BorderLayout());
-        mainPanel.add(view);
-        mainPanel.add(variablesLabel, BorderLayout.PAGE_START);
-        mainPanel.add(createButtonMenu(), BorderLayout.PAGE_END);
-        return mainPanel;
-    }
+	private JPanel initMainPanel()
+	{
+		JPanel mainPanel = new JPanel(new BorderLayout());
+		mainPanel.add(view);
+		mainPanel.add(variablesLabel, BorderLayout.PAGE_START);
+		mainPanel.add(createButtonMenu(), BorderLayout.PAGE_END);
+		return mainPanel;
+	}
 
 	private Timer createTimer(int delay)
 	{
@@ -96,11 +96,11 @@ public class SuperformulaFrame extends JFrame
 		return timer;
 	}
 
-    private void mutate(ActionEvent event)
-    {
-        controller.mutate();
-        this.update();
-    }
+	private void mutate(ActionEvent event)
+	{
+		controller.mutate();
+		this.update();
+	}
 
 	private void update()
 	{
@@ -111,19 +111,19 @@ public class SuperformulaFrame extends JFrame
 	private JMenuBar createMainMenu()
 	{
 		startStopMenuItem
-			= createMenuItem(MI_START, KeyEvent.VK_S);
+				= createMenuItem(MI_START, KeyEvent.VK_S);
 		showWikipediaDemoMenuItem
-			= createMenuItem(MI_SHOW_DEMO, KeyEvent.VK_D);
+				= createMenuItem(MI_SHOW_DEMO, KeyEvent.VK_D);
 		JMenuItem customModelMenuItem
-			= createMenuItem(MI_CUSTOM_MODEL, KeyEvent.VK_C);
+				= createMenuItem(MI_CUSTOM_MODEL, KeyEvent.VK_C);
 		JMenuItem sizeUpMenuItem
-			= createMenuItem(MI_SIZE_UP, KeyEvent.VK_UP);
+				= createMenuItem(MI_SIZE_UP, KeyEvent.VK_UP);
 		JMenuItem sizeDownMenuItem
-			= createMenuItem(MI_SIZE_DOWN, KeyEvent.VK_DOWN);
+				= createMenuItem(MI_SIZE_DOWN, KeyEvent.VK_DOWN);
 		JMenuItem helpMenuItem
-			= createMenuItem(MI_HELP, KeyEvent.VK_F1);
+				= createMenuItem(MI_HELP, KeyEvent.VK_F1);
 		JMenuItem aboutMenuItem
-			= createMenuItem(MI_ABOUT, KeyEvent.VK_A);
+				= createMenuItem(MI_ABOUT, KeyEvent.VK_A);
 
 		JMenu fileMenu = new JMenu("File");
 		fileMenu.add(startStopMenuItem);
@@ -152,7 +152,7 @@ public class SuperformulaFrame extends JFrame
 		JMenuItem menuItem = new JMenuItem(name, mnemonic);
 
 		menuItem.setAccelerator(KeyStroke.getKeyStroke(mnemonic,
-			KeyEvent.ALT_DOWN_MASK));
+				KeyEvent.ALT_DOWN_MASK));
 		menuItem.addActionListener(this::handleMenuClick);
 
 		return menuItem;
@@ -183,21 +183,21 @@ public class SuperformulaFrame extends JFrame
 		button.addActionListener(this::handleMenuClick);
 		return button;
 	}
-    
-    private void updateMutatorDelay(ChangeEvent changeEvent)
-    {
-        int value = speedSlider.getValue();
-        mutatorTimer.setDelay(value);
-        mutatorTimer.restart();
-    }
+
+	private void updateMutatorDelay(ChangeEvent changeEvent)
+	{
+		int value = speedSlider.getValue();
+		mutatorTimer.setDelay(value);
+		mutatorTimer.restart();
+	}
 
 	private void updateVariablesLabel()
 	{
 		// TODO: It would be nice if we could edit the values here.
 		variablesLabel.setText(String.format(
-			"a = %d    b = %d    m = %d    n1 = %d    n2 = %d    n3 = %d",
-			model.getA(), model.getB(),
-			model.getM(), model.getN1(), model.getN2(), model.getN3()));
+				"a = %d    b = %d    m = %d    n1 = %d    n2 = %d    n3 = %d",
+				model.getA(), model.getB(),
+				model.getM(), model.getN1(), model.getN2(), model.getN3()));
 	}
 
 	public void handleMenuClick(ActionEvent event)
@@ -257,32 +257,32 @@ public class SuperformulaFrame extends JFrame
 			case MI_HELP:
 				// Blocking:
 				JOptionPane.showMessageDialog(SuperformulaFrame.this,
-					"<html>"
-                        + "<body>"
-                        + "Check out the "
-                        + "<a href=https://en.wikipedia.org/wiki/Superformula>"
-                        + "Wikipedia page"
-                        + "</a>"
-                        + " on Superformulas"
-                        + "</body>"
-                        + "</html>",
-					"Help for " + SuperformulaFrame.this.getTitle(),
-					JOptionPane.QUESTION_MESSAGE);
+						"<html>"
+						+ "<body>"
+						+ "Check out the "
+						+ "<a href=https://en.wikipedia.org/wiki/Superformula>"
+						+ "Wikipedia page"
+						+ "</a>"
+						+ " on Superformulas"
+						+ "</body>"
+						+ "</html>",
+						"Help for " + SuperformulaFrame.this.getTitle(),
+						JOptionPane.QUESTION_MESSAGE);
 				break;
 			case MI_ABOUT:
 				// Blocking:
 				JOptionPane.showMessageDialog(SuperformulaFrame.this,
-					"By Jacob Patterson",
-					"About " + SuperformulaFrame.this.getTitle(),
-					JOptionPane.INFORMATION_MESSAGE);
+						"By Jacob Patterson",
+						"About " + SuperformulaFrame.this.getTitle(),
+						JOptionPane.INFORMATION_MESSAGE);
 				break;
 			default:
 				throw new IllegalArgumentException(String.format(
-					"Don't know how to handle an action of %s.", command));
+						"Don't know how to handle an action of %s.", command));
 		}
 	}
-    
-    private void changeCanvasSize(int delta)
+
+	private void changeCanvasSize(int delta)
 	{
 		boolean sizeChanged = controller.changeSize(delta);
 		if (sizeChanged)
@@ -301,13 +301,13 @@ public class SuperformulaFrame extends JFrame
 		}
 
 		final SpinnerNumberModel mSpinnerModel
-			= new SpinnerNumberModel(model.getM(), M_MIN, M_MAX, 1);
+				= new SpinnerNumberModel(model.getM(), M_MIN, M_MAX, 1);
 		final SpinnerNumberModel n1SpinnerModel
-			= new SpinnerNumberModel(model.getN1(), N1_MIN, N1_MAX, 1);
+				= new SpinnerNumberModel(model.getN1(), N1_MIN, N1_MAX, 1);
 		final SpinnerNumberModel n2SpinnerModel
-			= new SpinnerNumberModel(model.getN2(), N2_MIN, N2_MAX, 1);
+				= new SpinnerNumberModel(model.getN2(), N2_MIN, N2_MAX, 1);
 		final SpinnerNumberModel n3SpinnerModel
-			= new SpinnerNumberModel(model.getN3(), N3_MIN, N3_MAX, 1);
+				= new SpinnerNumberModel(model.getN3(), N3_MIN, N3_MAX, 1);
 		JPanel customModelPanel = new JPanel(new GridLayout(4, 2));
 		customModelPanel.add(new JLabel("m"));
 		customModelPanel.add(new JSpinner(mSpinnerModel));
@@ -319,9 +319,9 @@ public class SuperformulaFrame extends JFrame
 		customModelPanel.add(new JSpinner(n3SpinnerModel));
 		// Blocking:
 		int choice = JOptionPane.showConfirmDialog(SuperformulaFrame.this,
-			customModelPanel,
-			"Custom shape for " + SuperformulaFrame.this.getTitle(),
-			JOptionPane.OK_CANCEL_OPTION);
+				customModelPanel,
+				"Custom shape for " + SuperformulaFrame.this.getTitle(),
+				JOptionPane.OK_CANCEL_OPTION);
 		if (choice == JOptionPane.OK_OPTION)
 		{
 			startStopMenuItem.setText(MI_START);
@@ -339,19 +339,19 @@ public class SuperformulaFrame extends JFrame
 		}
 	}
 
-    private class SuperFormulaWindowListener extends WindowAdapter
-    {
-        private final Timer timer;
+	private class SuperFormulaWindowListener extends WindowAdapter
+	{
+		private final Timer timer;
 
-        public SuperFormulaWindowListener(Timer timer)
-        {
-            this.timer = timer;
-        }
-        
-        @Override
-        public void windowClosing(WindowEvent windowEvent)
-        {
-            timer.stop();
-        }
-    }
+		public SuperFormulaWindowListener(Timer timer)
+		{
+			this.timer = timer;
+		}
+
+		@Override
+		public void windowClosing(WindowEvent windowEvent)
+		{
+			timer.stop();
+		}
+	}
 }

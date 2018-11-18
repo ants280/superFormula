@@ -11,25 +11,27 @@ import java.awt.image.BufferedImage;
 public class SuperformulaView extends Canvas
 {
 	public static final Color WIKIPEDIA_SUPERFORMULA_COLOR
-		= new Color(0xC2FEC0);
+			= new Color(0xC2FEC0);
 	private Polygon formulaPolygon;
 
 	public void repaint(int[] xCoords, int[] yCoords)
 	{
 		if (xCoords.length != yCoords.length)
+		{
 			throw new IllegalArgumentException(
-				"Cannot paint.  x and y coords do not match.");
+					"Cannot paint.  x and y coords do not match.");
+		}
 
 		this.formulaPolygon = new Polygon(xCoords, yCoords, xCoords.length);
 		super.repaint();
 	}
-    
-    @Override
+
+	@Override
 	public void update(Graphics graphics)
 	{
 		BufferedImage lastDrawnImage
-			= (BufferedImage) this.createImage(
-				this.getWidth(), this.getHeight());
+				= (BufferedImage) this.createImage(
+						this.getWidth(), this.getHeight());
 
 		//Draws the shape onto the BufferedImage
 		this.paint(lastDrawnImage.getGraphics());
@@ -43,11 +45,10 @@ public class SuperformulaView extends Canvas
 	{
 		Graphics2D graphics2D = (Graphics2D) graphics;
 		graphics2D.setRenderingHint(
-			RenderingHints.KEY_ANTIALIASING,
-			RenderingHints.VALUE_ANTIALIAS_ON);
-		
+				RenderingHints.KEY_ANTIALIASING,
+				RenderingHints.VALUE_ANTIALIAS_ON);
+
 //        graphics2D.clearRect(0, 0, getWidth(), getHeight());
-		
 		if (formulaPolygon != null)
 		{
 			graphics2D.setColor(WIKIPEDIA_SUPERFORMULA_COLOR);

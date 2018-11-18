@@ -30,33 +30,33 @@ public final class SuperformulaModel
 	 * https://upload.wikimedia.org/wikipedia/commons/1/1c/Superformula.gif
 	 */
 	public static final SuperformulaModel[] WIKIPEDIA_SUPERFORMULAS
-		= new SuperformulaModel[]
-		{
-			new SuperformulaModel(3, 5, 18, 18),
-			new SuperformulaModel(5, 20, 7, 18),
-			new SuperformulaModel(4, 2, 4, 13),
-			new SuperformulaModel(7, 3, 4, 17),
-			new SuperformulaModel(7, 3, 6, 6),
-			new SuperformulaModel(3, 3, 14, 2),
-			new SuperformulaModel(19, 9, 14, 11),
-			new SuperformulaModel(12, 15, 20, 3),
-			new SuperformulaModel(8, 1, 1, 8),
-			new SuperformulaModel(8, 1, 5, 8),
-			new SuperformulaModel(8, 3, 4, 3),
-			new SuperformulaModel(8, 7, 8, 2),
-			new SuperformulaModel(5, 2, 6, 6),
-			new SuperformulaModel(6, 1, 1, 6),
-			new SuperformulaModel(6, 1, 7, 8),
-			new SuperformulaModel(7, 2, 8, 4),
-			new SuperformulaModel(3, 2, 8, 3),
-			new SuperformulaModel(3, 6, 6, 6),
-			new SuperformulaModel(4, 1, 7, 8),
-			new SuperformulaModel(4, 4, 7, 7),
-			new SuperformulaModel(2, 2, 2, 2),
-			new SuperformulaModel(2, 1, 1, 1),
-			new SuperformulaModel(2, 1, 4, 8),
-			new SuperformulaModel(3, 2, 5, 7),
-		};
+			= new SuperformulaModel[]
+			{
+				new SuperformulaModel(3, 5, 18, 18),
+				new SuperformulaModel(5, 20, 7, 18),
+				new SuperformulaModel(4, 2, 4, 13),
+				new SuperformulaModel(7, 3, 4, 17),
+				new SuperformulaModel(7, 3, 6, 6),
+				new SuperformulaModel(3, 3, 14, 2),
+				new SuperformulaModel(19, 9, 14, 11),
+				new SuperformulaModel(12, 15, 20, 3),
+				new SuperformulaModel(8, 1, 1, 8),
+				new SuperformulaModel(8, 1, 5, 8),
+				new SuperformulaModel(8, 3, 4, 3),
+				new SuperformulaModel(8, 7, 8, 2),
+				new SuperformulaModel(5, 2, 6, 6),
+				new SuperformulaModel(6, 1, 1, 6),
+				new SuperformulaModel(6, 1, 7, 8),
+				new SuperformulaModel(7, 2, 8, 4),
+				new SuperformulaModel(3, 2, 8, 3),
+				new SuperformulaModel(3, 6, 6, 6),
+				new SuperformulaModel(4, 1, 7, 8),
+				new SuperformulaModel(4, 4, 7, 7),
+				new SuperformulaModel(2, 2, 2, 2),
+				new SuperformulaModel(2, 1, 1, 1),
+				new SuperformulaModel(2, 1, 4, 8),
+				new SuperformulaModel(3, 2, 5, 7),
+			};
 
 	/**
 	 * Creates a new SuperformulaModel. Initializes a and b to 1. Initializes m,
@@ -271,8 +271,8 @@ public final class SuperformulaModel
 		if (value < min || value > max)
 		{
 			throw new IllegalArgumentException(String.format(
-				"%s must be between [%d,%d], but is %d.",
-				name, min, max, value));
+					"%s must be between [%d,%d], but is %d.",
+					name, min, max, value));
 		}
 	}
 }

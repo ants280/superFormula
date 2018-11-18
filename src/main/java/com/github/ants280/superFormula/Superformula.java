@@ -11,26 +11,26 @@ public class Superformula
 		setLookAndFeel();
 		SwingUtilities.invokeLater(Superformula::run);
 	}
-    
-    private static void setLookAndFeel()
-    {
-        try
-        {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        }
-        catch (ClassNotFoundException
-            | InstantiationException
-            | IllegalAccessException
-            | UnsupportedLookAndFeelException ex)
-        {
-            ex.printStackTrace(System.err);
-        }
-    }
+
+	private static void setLookAndFeel()
+	{
+		try
+		{
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		}
+		catch (ClassNotFoundException
+				| InstantiationException
+				| IllegalAccessException
+				| UnsupportedLookAndFeelException ex)
+		{
+			ex.printStackTrace(System.err);
+		}
+	}
 
 	private static void run()
 	{
 		SuperformulaFrame frame = new SuperformulaFrame();
-        frame.init();
+		frame.init();
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
