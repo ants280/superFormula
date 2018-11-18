@@ -8,6 +8,7 @@ import java.awt.Polygon;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 
+// TODO: Extend JComponent rather than Canvas in SuperformulaView.
 public class SuperformulaView extends Canvas
 {
 	public static final Color WIKIPEDIA_SUPERFORMULA_COLOR
