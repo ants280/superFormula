@@ -22,6 +22,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
+import javax.swing.event.ChangeEvent;
 
 public class SuperformulaFrame extends JFrame
 {
@@ -84,13 +85,13 @@ public class SuperformulaFrame extends JFrame
 
 	private Timer createTimer(int delay)
 	{
-		final Timer timer = new Timer(delay, actionEvent -> this.mutate());
+		final Timer timer = new Timer(delay, this::mutate);
 		this.addWindowListener(new SuperFormulaWindowListener(timer));
 
 		return timer;
 	}
 
-	private void mutate()
+	private void mutate(ActionEvent event)
 	{
 		controller.mutate();
 		this.update();
@@ -161,7 +162,7 @@ public class SuperformulaFrame extends JFrame
 		speedSlider.setMinorTickSpacing(50);
 		speedSlider.setSnapToTicks(true);
 		speedSlider.setPaintTicks(true);
-		speedSlider.addChangeListener(changeEvent -> this.updateMutatorDelay());
+		speedSlider.addChangeListener(this::updateMutatorDelay);
 
 		JPanel buttonPanel = new JPanel();
 		buttonPanel.add(startStopButton);
@@ -178,7 +179,7 @@ public class SuperformulaFrame extends JFrame
 		return button;
 	}
 
-	private void updateMutatorDelay()
+	private void updateMutatorDelay(ChangeEvent changeEvent)
 	{
 		int value = speedSlider.getValue();
 		mutatorTimer.setDelay(value);
