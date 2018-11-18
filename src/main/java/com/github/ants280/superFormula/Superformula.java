@@ -9,6 +9,7 @@ public class Superformula
 	public static void main(String[] args)
 	{
 		setLookAndFeel();
+
 		SwingUtilities.invokeLater(Superformula::run);
 	}
 
