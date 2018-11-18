@@ -65,28 +65,22 @@ public class SuperformulaFrame extends JFrame
 		updateVariablesLabel();
 		showWikipediaDemo = false;
 
-		initMainPanel();
+		init();
 		mutatorTimer = createTimer(speedSlider.getValue());
 
 		controller.update();
 	}
 
-	public void init()
+	private void init()
 	{
 		this.setJMenuBar(createMainMenu());
-		this.add(this.initMainPanel());
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.add(variablesLabel, BorderLayout.NORTH);
+		this.add(view);
+		this.add(createButtonMenu(), BorderLayout.SOUTH);
+
 		this.pack();
 		this.setResizable(false);
-	}
-
-	private JPanel initMainPanel()
-	{
-		JPanel mainPanel = new JPanel(new BorderLayout());
-		mainPanel.add(view);
-		mainPanel.add(variablesLabel, BorderLayout.PAGE_START);
-		mainPanel.add(createButtonMenu(), BorderLayout.PAGE_END);
-		return mainPanel;
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	private Timer createTimer(int delay)

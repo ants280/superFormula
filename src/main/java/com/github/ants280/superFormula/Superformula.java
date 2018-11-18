@@ -1,5 +1,6 @@
 package com.github.ants280.superFormula;
 
+import java.awt.Window;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -30,8 +31,9 @@ public class Superformula
 
 	private static void run()
 	{
-		SuperformulaFrame frame = new SuperformulaFrame();
-		frame.init();
+		Window frame = new SuperformulaFrame();
+
+		// Center the Window on the screen.
 		frame.setLocationRelativeTo(null);
 		frame.setVisible(true);
 	}
