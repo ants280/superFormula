@@ -50,7 +50,7 @@ public class SuperformulaController
 		{
 			wikipediaDemosIndex = 0;
 			model.setParameters(
-					SuperformulaModel.WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
+					WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
 		}
 		else
 		{
@@ -109,12 +109,11 @@ public class SuperformulaController
 		if (showWikipediaDemos)
 		{
 			wikipediaDemosIndex++;
-			if (wikipediaDemosIndex == SuperformulaModel.WIKIPEDIA_SUPERFORMULAS.length)
+			if (wikipediaDemosIndex == WIKIPEDIA_SUPERFORMULAS.length)
 			{
 				wikipediaDemosIndex = 0;
 			}
-			model.setParameters(
-					SuperformulaModel.WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
+			model.setParameters(WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
 		}
 		else
 		{
@@ -135,7 +134,8 @@ public class SuperformulaController
 					break;
 				default:
 					throw new AssertionError(String.format(
-							"Unknown parameter to mutate: ", parameterToMutate));
+							"Unknown parameter to mutate: ",
+							parameterToMutate));
 			}
 		}
 	}
