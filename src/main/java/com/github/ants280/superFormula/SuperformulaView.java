@@ -12,6 +12,7 @@ public class SuperformulaView extends Canvas
 {
 	public static final Color WIKIPEDIA_SUPERFORMULA_COLOR
 			= new Color(0xC2FEC0);
+	private static final long serialVersionUID = 1L;
 	private Polygon formulaPolygon;
 
 	public void repaint(int[] xCoords, int[] yCoords)

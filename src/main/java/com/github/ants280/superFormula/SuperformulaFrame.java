@@ -35,6 +35,7 @@ public class SuperformulaFrame extends JFrame
 	private static final String MI_SIZE_DOWN = "Decrease canvas size";
 	private static final String MI_HELP = "Help...";
 	private static final String MI_ABOUT = "About...";
+	private static final long serialVersionUID = 1L;
 
 	private final SuperformulaModel model;
 	private final SuperformulaView view;
