@@ -88,12 +88,12 @@
 				<artifactId>maven-site-plugin</artifactId>
 				<version>3.7.1</version>
 			</plugin>
-<!--			<plugin>
-				 (from super-pom) 
+			<plugin>
+				<!-- (from super-pom) --> 
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.0.0-M1</version>
-			</plugin>-->
+			</plugin>
 			<plugin>
 				<!-- for running code -->
 				<groupId>org.codehaus.mojo</groupId>
