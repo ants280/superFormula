@@ -147,7 +147,6 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 
 	private void updateVariablesLabel()
 	{
-		// TODO: It would be nice if we could edit the values here.
 		variablesLabel.setText(String.format(
 				"a = %d    b = %d    m = %d    n1 = %d    n2 = %d    n3 = %d",
 				model.getA(), model.getB(),
