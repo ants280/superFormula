@@ -143,7 +143,6 @@ public class SuperformulaFrame extends JFrame
 			JMenuItem helpMenuItem,
 			JMenuItem aboutMenuItem)
 	{
-		// TODO: should all menu objects use mnemonics or accelerators?
 		startStopMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_S));
 		showWikipediaDemoMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_D));
 		customModelMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_C));
