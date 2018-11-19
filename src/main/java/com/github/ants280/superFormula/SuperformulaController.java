@@ -37,7 +37,6 @@ public class SuperformulaController
 
 		units += deltaUnits;
 		view.setSuperformulaRadius(units * CANVAS_SIZE_SCALE);
-		view.repaint();
 		return true;
 	}
 
