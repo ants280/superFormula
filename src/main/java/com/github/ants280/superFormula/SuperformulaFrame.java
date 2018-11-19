@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -86,7 +87,7 @@ public class SuperformulaFrame extends JFrame
 		init(
 				menuBar,
 				variablesLabel,
-				view,
+				view.getDisplayComponent(),
 				buttonPanel,
 				mutatorTimer);
 
@@ -96,7 +97,7 @@ public class SuperformulaFrame extends JFrame
 	private void init(
 			JMenuBar menuBar,
 			JLabel variablesLabel,
-			SuperformulaView superFormulaDisplayComponent,
+			JComponent superFormulaDisplayComponent,
 			JPanel buttonPanel,
 			Timer mutatorTimer)
 	{

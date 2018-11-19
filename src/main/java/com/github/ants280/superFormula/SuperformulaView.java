@@ -1,20 +1,21 @@
 package com.github.ants280.superFormula;
 
-import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
+import javax.swing.JComponent;
 
-// TODO: Extend JComponent rather than Canvas in SuperformulaView.
-public class SuperformulaView extends Canvas
+public class SuperformulaView
 {
-	public static final Color WIKIPEDIA_SUPERFORMULA_COLOR
-			= new Color(0xC2FEC0);
-	private static final long serialVersionUID = 1L;
+	private final JComponent displayComponent;
 	private Polygon formulaPolygon;
+
+	public SuperformulaView()
+	{
+		this.displayComponent = new SuperformulaDisplayComponent(this);
+	}
 
 	public void repaint(int[] xCoords, int[] yCoords)
 	{
@@ -25,38 +26,62 @@ public class SuperformulaView extends Canvas
 		}
 
 		this.formulaPolygon = new Polygon(xCoords, yCoords, xCoords.length);
-		super.repaint();
+
+		displayComponent.repaint();
 	}
 
-	@Override
-	public void update(Graphics graphics)
+	private Polygon getFormulaPolygon()
 	{
-		BufferedImage lastDrawnImage
-				= (BufferedImage) this.createImage(
-						this.getWidth(), this.getHeight());
-
-		//Draws the shape onto the BufferedImage
-		this.paint(lastDrawnImage.getGraphics());
-
-		//Draws the BufferedImage onto the PaintPanel
-		graphics.drawImage(lastDrawnImage, 0, 0, this);
+		return formulaPolygon;
 	}
 
-	@Override
-	public void paint(Graphics graphics)
+	public JComponent getDisplayComponent()
 	{
-		Graphics2D graphics2D = (Graphics2D) graphics;
-		graphics2D.setRenderingHint(
-				RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+		return displayComponent;
+	}
 
-//        graphics2D.clearRect(0, 0, getWidth(), getHeight());
-		if (formulaPolygon != null)
+	public int getWidth()
+	{
+		return displayComponent.getWidth();
+	}
+
+	public int getHeight()
+	{
+		return displayComponent.getHeight();
+	}
+
+	public void setSize(int width, int height)
+	{
+		displayComponent.setSize(width, height);
+	}
+
+	private static class SuperformulaDisplayComponent extends JComponent
+	{
+		public static final Color WIKIPEDIA_SUPERFORMULA_COLOR
+				= new Color(0xC2FEC0);
+		private static final long serialVersionUID = 1L;
+		private final SuperformulaView view;
+
+		public SuperformulaDisplayComponent(SuperformulaView view)
 		{
-			graphics2D.setColor(WIKIPEDIA_SUPERFORMULA_COLOR);
-			graphics2D.fillPolygon(formulaPolygon);
-			graphics2D.setColor(Color.BLACK);
-			graphics2D.drawPolygon(formulaPolygon);
+			this.view = view;
+		}
+
+		@Override
+		protected void paintComponent(Graphics g)
+		{
+			((Graphics2D) g).setRenderingHint(
+					RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
+
+			Polygon formulaPolygon = view.getFormulaPolygon();
+			if (formulaPolygon != null)
+			{
+				g.setColor(WIKIPEDIA_SUPERFORMULA_COLOR);
+				g.fillPolygon(formulaPolygon);
+				g.setColor(Color.BLACK);
+				g.drawPolygon(formulaPolygon);
+			}
 		}
 	}
 }
