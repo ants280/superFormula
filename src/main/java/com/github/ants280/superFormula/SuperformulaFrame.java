@@ -13,7 +13,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
-import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
@@ -143,13 +142,13 @@ public class SuperformulaFrame extends JFrame
 			JMenuItem helpMenuItem,
 			JMenuItem aboutMenuItem)
 	{
-		startStopMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_S));
-		showWikipediaDemoMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_D));
-		customModelMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_C));
-		sizeUpMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_UP));
-		sizeDownMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_DOWN));
-		helpMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_F1));
-		aboutMenuItem.setAccelerator(createKeyStroke(KeyEvent.VK_A));
+		startStopMenuItem.setMnemonic(KeyEvent.VK_S);
+		showWikipediaDemoMenuItem.setMnemonic(KeyEvent.VK_D);
+		customModelMenuItem.setMnemonic(KeyEvent.VK_C);
+		sizeUpMenuItem.setMnemonic(KeyEvent.VK_I);
+		sizeDownMenuItem.setMnemonic(KeyEvent.VK_D);
+		helpMenuItem.setMnemonic(KeyEvent.VK_H);
+		aboutMenuItem.setMnemonic(KeyEvent.VK_A);
 
 		JMenu fileMenu = new JMenu("File");
 		fileMenu.add(startStopMenuItem);
@@ -171,11 +170,6 @@ public class SuperformulaFrame extends JFrame
 		mainMenu.add(helpMenu);
 
 		return mainMenu;
-	}
-
-	private static KeyStroke createKeyStroke(int mnemonic)
-	{
-		return KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK);
 	}
 
 	private static class SuperformulaWindowListener extends WindowAdapter
