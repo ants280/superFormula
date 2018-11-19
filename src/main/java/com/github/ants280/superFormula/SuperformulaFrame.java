@@ -44,7 +44,9 @@ public class SuperformulaFrame extends JFrame
 
 		JButton startStopButton = new JButton();
 		JButton showWikipediaDemoButton = new JButton();
-		JSlider speedSlider = new JSlider(SwingConstants.HORIZONTAL, 10, 3_000, 300);
+		JSlider speedSlider = new JSlider(
+				SwingConstants.HORIZONTAL,
+				10, 3_000, 300);
 		speedSlider.setMajorTickSpacing(100);
 		speedSlider.setMinorTickSpacing(50);
 		speedSlider.setSnapToTicks(true);
