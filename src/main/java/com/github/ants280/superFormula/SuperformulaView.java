@@ -106,11 +106,14 @@ public class SuperformulaView
 			int height = this.getHeight();
 			int[] xCoords = new int[NUM_POINTS];
 			int[] yCoords = new int[NUM_POINTS];
-			double scale = (view.getSuperformulaRadius() + 0.0d) / maxValue * 0.95d;
+			double scale = ((view.getSuperformulaRadius() + 0.0d) / maxValue)
+					* 0.95d;
 			for (int i = 0; i < NUM_POINTS; i++)
 			{
-				xCoords[i] = (int) Math.round((width / 2) + (xValues[i] * scale));
-				yCoords[i] = (int) Math.round((height / 2d) + (yValues[i] * scale));
+				xCoords[i] = (int) Math.round(
+						(width / 2) + (xValues[i] * scale));
+				yCoords[i] = (int) Math.round(
+						(height / 2d) + (yValues[i] * scale));
 			}
 
 			return new Polygon(xCoords, yCoords, xCoords.length);
@@ -119,10 +122,11 @@ public class SuperformulaView
 		private double getR(double phi)
 		{
 			SuperformulaModel model = view.getModel();
-			double r = Math.pow(Math.abs(Math.pow(Math.abs(Math.cos(model.getM() * phi / 4.0) / model.getA()), model.getN2())
-					+ Math.pow(Math.abs(Math.sin(model.getM() * phi / 4.0) / model.getB()), model.getN3())),
-					-1.0 / model.getN1());
-			return r;
+			double bTop = Math.sin(model.getM() * phi / 4.0);
+			double aTop = Math.cos(model.getM() * phi / 4.0);
+			double x = Math.pow(Math.abs(aTop / model.getA()), model.getN2());
+			double y = Math.pow(Math.abs(bTop / model.getB()), model.getN3());
+			return Math.pow(Math.abs(x + y), -1.0 / model.getN1());
 		}
 	}
 }
