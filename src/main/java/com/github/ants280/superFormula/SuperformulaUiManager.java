@@ -108,6 +108,9 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		helpMenuItem.addActionListener(this);
 		aboutMenuItem.addActionListener(this);
 
+		// Variables Label:
+		this.updateVariablesLabel();
+
 		// Buttons:
 		startStopButton.setText(MI_START);
 		showWikipediaDemoButton.setText(MI_SHOW_DEMO);
