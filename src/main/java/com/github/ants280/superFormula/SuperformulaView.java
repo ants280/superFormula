@@ -1,6 +1,7 @@
 package com.github.ants280.superFormula;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Polygon;
@@ -11,10 +12,13 @@ public class SuperformulaView
 {
 	private final JComponent displayComponent;
 	private Polygon formulaPolygon;
+	private int superformulaRadius;
 
 	public SuperformulaView()
 	{
 		this.displayComponent = new SuperformulaDisplayComponent(this);
+		this.superformulaRadius = 250;
+		this.updateSizeForNewRadius();
 	}
 
 	public void repaint(int[] xCoords, int[] yCoords)
@@ -50,9 +54,24 @@ public class SuperformulaView
 		return displayComponent.getHeight();
 	}
 
-	public void setSize(int width, int height)
+	public int getSuperformulaRadius()
 	{
-		displayComponent.setSize(width, height);
+		return superformulaRadius;
+	}
+
+	public void setSuperformulaRadius(int superformulaRadius)
+	{
+		this.superformulaRadius = superformulaRadius;
+
+		this.updateSizeForNewRadius();
+	}
+
+	private void updateSizeForNewRadius()
+	{
+		int superformulaDiameter = 2 * superformulaRadius;
+		displayComponent.setSize(superformulaDiameter, superformulaDiameter);
+		displayComponent.setMinimumSize(
+				new Dimension(superformulaDiameter, superformulaDiameter));
 	}
 
 	private static class SuperformulaDisplayComponent extends JComponent
@@ -70,6 +89,8 @@ public class SuperformulaView
 		@Override
 		protected void paintComponent(Graphics g)
 		{
+			System.out.printf("[w,h]:[%d,%d]%n", getWidth(), getHeight());
+
 			((Graphics2D) g).setRenderingHint(
 					RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);

@@ -13,7 +13,6 @@ public class SuperformulaController
 	private int units;
 	private boolean showWikipediaDemos;
 	private int wikipediaDemosIndex;
-	private int radius;
 
 	public SuperformulaController(
 			SuperformulaModel model, SuperformulaView view)
@@ -21,7 +20,7 @@ public class SuperformulaController
 		this.model = model;
 		this.view = view;
 		this.showWikipediaDemos = false;
-		this.units = 0;
+		this.units = view.getSuperformulaRadius() / CANVAS_SIZE_SCALE;
 	}
 
 	/**
@@ -38,8 +37,7 @@ public class SuperformulaController
 		}
 
 		units += deltaUnits;
-		radius = units * CANVAS_SIZE_SCALE;
-		view.setSize(radius * 2, radius * 2);
+		view.setSuperformulaRadius(units * CANVAS_SIZE_SCALE);
 		return true;
 	}
 
@@ -83,7 +81,7 @@ public class SuperformulaController
 
 		int[] xCoords = new int[NUM_POINTS];
 		int[] yCoords = new int[NUM_POINTS];
-		double scale = (radius + 0.0d) / maxValue * 0.95d;
+		double scale = (view.getSuperformulaRadius() + 0.0d) / maxValue * 0.95d;
 		for (int i = 0; i < NUM_POINTS; i++)
 		{
 			xCoords[i] = view.getWidth() / 2 + (int) Math.round(xValues[i] * scale);

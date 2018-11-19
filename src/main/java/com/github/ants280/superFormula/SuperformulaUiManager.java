@@ -47,7 +47,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	private final Timer mutatorTimer;
 	private boolean showWikipediaDemo;
 
-	private SuperformulaUiManager(
+	public SuperformulaUiManager(
 			SuperformulaModel model,
 			SuperformulaController controller,
 			JFrame parentComponent,
@@ -62,8 +62,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 			JButton startStopButton,
 			JButton showWikipediaDemoButton,
 			JSlider speedSlider,
-			Timer mutatorTimer,
-			boolean showWikipediaDemo)
+			Timer mutatorTimer)
 	{
 		this.model = model;
 		this.controller = controller;
@@ -83,9 +82,11 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 
 		this.mutatorTimer = mutatorTimer;
 		this.showWikipediaDemo = false;
+
+		init();
 	}
 
-	private void initialize()
+	private void init()
 	{
 		// MenuItems:
 		startStopMenuItem.setText(MI_START);
@@ -285,43 +286,5 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		{
 			mutatorTimer.start();
 		}
-	}
-
-	public static void create(SuperformulaModel model,
-			SuperformulaController controller,
-			SuperformulaFrame aThis,
-			JMenuItem startStopMenuItem,
-			JMenuItem showWikipediaDemoMenuItem,
-			JMenuItem customModelMenuItem,
-			JMenuItem sizeUpMenuItem,
-			JMenuItem sizeDownMenuItem,
-			JMenuItem helpMenuItem,
-			JMenuItem aboutMenuItem,
-			JLabel variablesLabel,
-			JButton startStopButton,
-			JButton showWikipediaDemoButton,
-			JSlider speedSlider,
-			Timer mutatorTimer,
-			boolean rootPaneCheckingEnabled)
-	{
-		SuperformulaUiManager superformulaUiManager = new SuperformulaUiManager(
-				model,
-				controller,
-				aThis,
-				startStopMenuItem,
-				showWikipediaDemoMenuItem,
-				customModelMenuItem,
-				sizeUpMenuItem,
-				sizeDownMenuItem,
-				helpMenuItem,
-				aboutMenuItem,
-				variablesLabel,
-				startStopButton,
-				showWikipediaDemoButton,
-				speedSlider,
-				mutatorTimer,
-				rootPaneCheckingEnabled);
-
-		superformulaUiManager.initialize();
 	}
 }

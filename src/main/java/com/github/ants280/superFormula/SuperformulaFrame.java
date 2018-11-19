@@ -1,6 +1,7 @@
 package com.github.ants280.superFormula;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -33,14 +34,6 @@ public class SuperformulaFrame extends JFrame
 		JMenuItem sizeDownMenuItem = new JMenuItem();
 		JMenuItem helpMenuItem = new JMenuItem();
 		JMenuItem aboutMenuItem = new JMenuItem();
-		JMenuBar menuBar = createMainMenu(
-				startStopMenuItem,
-				showWikipediaDemoMenuItem,
-				customModelMenuItem,
-				sizeUpMenuItem,
-				sizeDownMenuItem,
-				helpMenuItem,
-				aboutMenuItem);
 
 		JLabel variablesLabel = new JLabel();
 
@@ -59,14 +52,45 @@ public class SuperformulaFrame extends JFrame
 		speedSlider.setSnapToTicks(true);
 		speedSlider.setPaintTicks(true);
 
-		JPanel buttonPanel = new JPanel();
-		buttonPanel.add(startStopButton);
-		buttonPanel.add(showWikipediaDemoButton);
-		buttonPanel.add(speedSlider);
-
 		Timer mutatorTimer = new Timer(speedSlider.getValue(), null);
 
-		SuperformulaUiManager.create(
+		init(model,
+				controller,
+				startStopMenuItem,
+				showWikipediaDemoMenuItem,
+				customModelMenuItem,
+				sizeUpMenuItem,
+				sizeDownMenuItem,
+				helpMenuItem,
+				aboutMenuItem,
+				variablesLabel,
+				view.getDisplayComponent(),
+				startStopButton,
+				showWikipediaDemoButton,
+				speedSlider,
+				mutatorTimer);
+
+		controller.update();
+	}
+
+	private void init(
+			SuperformulaModel model,
+			SuperformulaController controller,
+			JMenuItem startStopMenuItem,
+			JMenuItem showWikipediaDemoMenuItem,
+			JMenuItem customModelMenuItem,
+			JMenuItem sizeUpMenuItem,
+			JMenuItem sizeDownMenuItem,
+			JMenuItem helpMenuItem,
+			JMenuItem aboutMenuItem,
+			JLabel variablesLabel,
+			JComponent superformulaDisplayComponent,
+			JButton startStopButton,
+			JButton showWikipediaDemoButton,
+			JSlider speedSlider,
+			Timer mutatorTimer)
+	{
+		new SuperformulaUiManager(
 				model,
 				controller,
 				this,
@@ -81,36 +105,33 @@ public class SuperformulaFrame extends JFrame
 				startStopButton,
 				showWikipediaDemoButton,
 				speedSlider,
-				mutatorTimer,
-				rootPaneCheckingEnabled);
-
-		init(
-				menuBar,
-				variablesLabel,
-				view.getDisplayComponent(),
-				buttonPanel,
 				mutatorTimer);
 
-		controller.update();
-	}
+		JMenuBar menuBar = createMainMenu(
+				startStopMenuItem,
+				showWikipediaDemoMenuItem,
+				customModelMenuItem,
+				sizeUpMenuItem,
+				sizeDownMenuItem,
+				helpMenuItem,
+				aboutMenuItem);
 
-	private void init(
-			JMenuBar menuBar,
-			JLabel variablesLabel,
-			JComponent superFormulaDisplayComponent,
-			JPanel buttonPanel,
-			Timer mutatorTimer)
-	{
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(startStopButton);
+		buttonPanel.add(showWikipediaDemoButton);
+		buttonPanel.add(speedSlider);
+
 		this.addWindowListener(new SuperformulaWindowListener(mutatorTimer));
 
 		this.setJMenuBar(menuBar);
 		this.add(variablesLabel, BorderLayout.NORTH);
-		this.add(superFormulaDisplayComponent);
+		this.add(superformulaDisplayComponent);
 		this.add(buttonPanel, BorderLayout.SOUTH);
 
 		this.pack();
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setMinimumSize(new Dimension(600, 600));
 	}
 
 	private JMenuBar createMainMenu(
