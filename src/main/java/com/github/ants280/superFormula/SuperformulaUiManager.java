@@ -246,7 +246,9 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				break;
 			case MI_HELP:
 				// Blocking:
-				JOptionPane.showMessageDialog(parentComponent,
+				JOptionPane.showMessageDialog(
+						parentComponent,
+						// TODO: Link not clickable
 						"<html>"
 						+ "<body>"
 						+ "Check out the "
@@ -261,7 +263,8 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				break;
 			case MI_ABOUT:
 				// Blocking:
-				JOptionPane.showMessageDialog(parentComponent,
+				JOptionPane.showMessageDialog(
+						parentComponent,
 						"By Jacob Patterson",
 						"About " + parentComponent.getTitle(),
 						JOptionPane.INFORMATION_MESSAGE);
