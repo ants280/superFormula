@@ -20,13 +20,7 @@ public class SuperformulaView
 		this.displayComponent = new SuperformulaDisplayComponent(this);
 		this.superformulaRadius = 250;
 
-		init();
-	}
-
-	private void init()
-	{
 		this.updateSizeForNewRadius();
-		this.repaint();
 	}
 
 	public void repaint()
@@ -54,7 +48,6 @@ public class SuperformulaView
 		this.superformulaRadius = superformulaRadius;
 
 		this.updateSizeForNewRadius();
-
 	}
 
 	private void updateSizeForNewRadius()
@@ -63,7 +56,6 @@ public class SuperformulaView
 		Dimension preferredSize
 				= new Dimension(superformulaDiameter, superformulaDiameter);
 
-		displayComponent.setSize(preferredSize);
 		displayComponent.setPreferredSize(preferredSize);
 	}
 
