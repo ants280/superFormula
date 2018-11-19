@@ -1,7 +1,6 @@
 package com.github.ants280.superFormula;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
@@ -133,7 +132,6 @@ public class SuperformulaFrame extends JFrame
 		this.pack();
 		this.setResizable(false);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		this.setMinimumSize(new Dimension(600, 600));
 	}
 
 	private JMenuBar createMainMenu(

@@ -21,7 +21,14 @@ public class SuperformulaView
 		this.model = model;
 		this.displayComponent = new SuperformulaDisplayComponent(this);
 		this.superformulaRadius = 250;
+
+		init();
+	}
+
+	private void init()
+	{
 		this.updateSizeForNewRadius();
+		this.repaint();
 	}
 
 	public void repaint()
@@ -101,10 +108,11 @@ public class SuperformulaView
 	private void updateSizeForNewRadius()
 	{
 		int superformulaDiameter = 2 * superformulaRadius;
-		displayComponent.setSize(superformulaDiameter, superformulaDiameter);
-		displayComponent.setMinimumSize(
-				new Dimension(superformulaDiameter, superformulaDiameter));
-		this.repaint();
+		Dimension preferredSize
+				= new Dimension(superformulaDiameter, superformulaDiameter);
+
+		displayComponent.setSize(preferredSize);
+		displayComponent.setPreferredSize(preferredSize);
 	}
 
 	private static class SuperformulaDisplayComponent extends JComponent
@@ -122,7 +130,7 @@ public class SuperformulaView
 		@Override
 		protected void paintComponent(Graphics g)
 		{
-			System.out.printf("[w,h]:[%d,%d]%n", getWidth(), getHeight());
+			System.out.printf("painting: [w,h]:[%d,%d]%n", getWidth(), getHeight());
 
 			((Graphics2D) g).setRenderingHint(
 					RenderingHints.KEY_ANTIALIASING,
