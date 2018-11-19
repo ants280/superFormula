@@ -179,7 +179,7 @@ public class SuperformulaFrame extends JFrame
 		return KeyStroke.getKeyStroke(mnemonic, KeyEvent.ALT_DOWN_MASK);
 	}
 
-	private class SuperformulaWindowListener extends WindowAdapter
+	private static class SuperformulaWindowListener extends WindowAdapter
 	{
 		private final Timer timer;
 
