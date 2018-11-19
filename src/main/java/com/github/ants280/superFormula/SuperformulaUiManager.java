@@ -30,6 +30,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	private static final String MI_ABOUT = "About...";
 
 	private final SuperformulaModel model;
+	private final SuperformulaView view;
 	private final SuperformulaController controller;
 
 	private final JFrame parentComponent;
@@ -49,6 +50,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 
 	public SuperformulaUiManager(
 			SuperformulaModel model,
+			SuperformulaView view,
 			SuperformulaController controller,
 			JFrame parentComponent,
 			JMenuItem startStopMenuItem,
@@ -65,6 +67,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 			Timer mutatorTimer)
 	{
 		this.model = model;
+		this.view = view;
 		this.controller = controller;
 
 		this.parentComponent = parentComponent;
@@ -128,7 +131,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	private void update()
 	{
 		this.updateVariablesLabel();
-		controller.update();
+		view.repaint();
 	}
 
 	@Override
@@ -237,7 +240,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		if (sizeChanged)
 		{
 			parentComponent.pack();
-			controller.update();
+			view.repaint();
 		}
 	}
 

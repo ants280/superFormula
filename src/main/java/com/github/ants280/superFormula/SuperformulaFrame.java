@@ -40,10 +40,9 @@ public class SuperformulaFrame extends JFrame
 		variablesLabel.setHorizontalAlignment(SwingConstants.CENTER);
 
 		SuperformulaModel model = new SuperformulaModel();
-		SuperformulaView view = new SuperformulaView();
+		SuperformulaView view = new SuperformulaView(model);
 		SuperformulaController controller
 				= new SuperformulaController(model, view);
-		controller.update();
 
 		JButton startStopButton = new JButton();
 		JButton showWikipediaDemoButton = new JButton();
@@ -55,7 +54,9 @@ public class SuperformulaFrame extends JFrame
 
 		Timer mutatorTimer = new Timer(speedSlider.getValue(), null);
 
-		init(model,
+		init(
+				model,
+				view,
 				controller,
 				startStopMenuItem,
 				showWikipediaDemoMenuItem,
@@ -74,6 +75,7 @@ public class SuperformulaFrame extends JFrame
 
 	private void init(
 			SuperformulaModel model,
+			SuperformulaView view,
 			SuperformulaController controller,
 			JMenuItem startStopMenuItem,
 			JMenuItem showWikipediaDemoMenuItem,
@@ -91,6 +93,7 @@ public class SuperformulaFrame extends JFrame
 	{
 		new SuperformulaUiManager(
 				model,
+				view,
 				controller,
 				this,
 				startStopMenuItem,
