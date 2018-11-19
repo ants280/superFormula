@@ -10,10 +10,8 @@ import javax.swing.JComponent;
 
 public class SuperformulaView
 {
-	private final int NUM_POINTS = 1024;
 	private final SuperformulaModel model;
 	private final JComponent displayComponent;
-	private Polygon formulaPolygon;
 	private int superformulaRadius;
 
 	public SuperformulaView(SuperformulaModel model)
@@ -33,58 +31,12 @@ public class SuperformulaView
 
 	public void repaint()
 	{
-		this.formulaPolygon = createFormulaPolygon();
-
 		displayComponent.repaint();
 	}
 
-	private Polygon createFormulaPolygon()
+	private SuperformulaModel getModel()
 	{
-		int width = displayComponent.getWidth();
-		int height = displayComponent.getHeight();
-		System.out.printf("\t updating view.  [w,h] = [%d,%d]%n", width, height);
-
-		double maxValue = 0;
-		double[] xValues = new double[NUM_POINTS];
-		double[] yValues = new double[NUM_POINTS];
-
-		for (int i = 0; i < NUM_POINTS; i++)
-		{
-			double phi = 2 * Math.PI * ((i + 0.0d) / NUM_POINTS);
-			double r = getR(phi);
-			xValues[i] = r * Math.cos(phi);
-			yValues[i] = r * Math.sin(phi);
-			maxValue = Math.max(maxValue, Math.abs(xValues[i]));
-			maxValue = Math.max(maxValue, Math.abs(yValues[i]));
-//			System.out.println(String.format("%3d    %7.4f    %7.4f    {%7.4f,%7.4f}", i, phi, r, xValues[i], yValues[i]));
-		}
-
-		int[] xCoords = new int[NUM_POINTS];
-		int[] yCoords = new int[NUM_POINTS];
-		double scale = (superformulaRadius + 0.0d) / maxValue * 0.95d;
-		for (int i = 0; i < NUM_POINTS; i++)
-		{
-			xCoords[i] = (int) Math.round((width / 2) + (xValues[i] * scale));
-			yCoords[i] = (int) Math.round((height / 2d) + (yValues[i] * scale));
-//			xCoords[i] = view.getWidth() / 2 + (int) (xValues[i] * scale);
-//			yCoords[i] = view.getHeight() / 2 + (int) (yValues[i] * scale);
-		}
-
-		return new Polygon(xCoords, yCoords, xCoords.length);
-	}
-
-	private double getR(double phi)
-	{
-		double r = Math.pow(Math.abs(
-				Math.pow(Math.abs(Math.cos(model.getM() * phi / 4.0) / model.getA()), model.getN2())
-				+ Math.pow(Math.abs(Math.sin(model.getM() * phi / 4.0) / model.getB()), model.getN3())),
-				-1.0 / model.getN1());
-		return r;
-	}
-
-	private Polygon getFormulaPolygon()
-	{
-		return formulaPolygon;
+		return model;
 	}
 
 	public JComponent getDisplayComponent()
@@ -119,6 +71,7 @@ public class SuperformulaView
 	{
 		public static final Color WIKIPEDIA_SUPERFORMULA_COLOR
 				= new Color(0xC2FEC0);
+		private static final int NUM_POINTS = 1024;
 		private static final long serialVersionUID = 1L;
 		private final SuperformulaView view;
 
@@ -136,7 +89,7 @@ public class SuperformulaView
 					RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
 
-			Polygon formulaPolygon = view.getFormulaPolygon();
+			Polygon formulaPolygon = createFormulaPolygon();
 			if (formulaPolygon != null)
 			{
 				g.setColor(WIKIPEDIA_SUPERFORMULA_COLOR);
@@ -144,6 +97,50 @@ public class SuperformulaView
 				g.setColor(Color.BLACK);
 				g.drawPolygon(formulaPolygon);
 			}
+		}
+
+		private Polygon createFormulaPolygon()
+		{
+			int width = this.getWidth();
+			int height = this.getHeight();
+			System.out.printf("\t updating view.  [w,h] = [%d,%d]%n", width, height);
+
+			double maxValue = 0;
+			double[] xValues = new double[NUM_POINTS];
+			double[] yValues = new double[NUM_POINTS];
+
+			for (int i = 0; i < NUM_POINTS; i++)
+			{
+				double phi = 2 * Math.PI * ((i + 0.0d) / NUM_POINTS);
+				double r = getR(phi);
+				xValues[i] = r * Math.cos(phi);
+				yValues[i] = r * Math.sin(phi);
+				maxValue = Math.max(maxValue, Math.abs(xValues[i]));
+				maxValue = Math.max(maxValue, Math.abs(yValues[i]));
+//			System.out.println(String.format("%3d    %7.4f    %7.4f    {%7.4f,%7.4f}", i, phi, r, xValues[i], yValues[i]));
+			}
+
+			int[] xCoords = new int[NUM_POINTS];
+			int[] yCoords = new int[NUM_POINTS];
+			double scale = (view.getSuperformulaRadius() + 0.0d) / maxValue * 0.95d;
+			for (int i = 0; i < NUM_POINTS; i++)
+			{
+				xCoords[i] = (int) Math.round((width / 2) + (xValues[i] * scale));
+				yCoords[i] = (int) Math.round((height / 2d) + (yValues[i] * scale));
+//			xCoords[i] = view.getWidth() / 2 + (int) (xValues[i] * scale);
+//			yCoords[i] = view.getHeight() / 2 + (int) (yValues[i] * scale);
+			}
+
+			return new Polygon(xCoords, yCoords, xCoords.length);
+		}
+
+		private double getR(double phi)
+		{
+			SuperformulaModel model = view.getModel();
+			double r = Math.pow(Math.abs(Math.pow(Math.abs(Math.cos(model.getM() * phi / 4.0) / model.getA()), model.getN2())
+					+ Math.pow(Math.abs(Math.sin(model.getM() * phi / 4.0) / model.getB()), model.getN3())),
+					-1.0 / model.getN1());
+			return r;
 		}
 	}
 }
