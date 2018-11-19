@@ -44,16 +44,6 @@ public class SuperformulaView
 		return displayComponent;
 	}
 
-	public int getWidth()
-	{
-		return displayComponent.getWidth();
-	}
-
-	public int getHeight()
-	{
-		return displayComponent.getHeight();
-	}
-
 	public int getSuperformulaRadius()
 	{
 		return superformulaRadius;

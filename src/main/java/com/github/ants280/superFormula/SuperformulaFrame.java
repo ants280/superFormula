@@ -43,6 +43,7 @@ public class SuperformulaFrame extends JFrame
 		SuperformulaView view = new SuperformulaView();
 		SuperformulaController controller
 				= new SuperformulaController(model, view);
+		controller.update();
 
 		JButton startStopButton = new JButton();
 		JButton showWikipediaDemoButton = new JButton();
@@ -69,8 +70,6 @@ public class SuperformulaFrame extends JFrame
 				showWikipediaDemoButton,
 				speedSlider,
 				mutatorTimer);
-
-		controller.update();
 	}
 
 	private void init(

@@ -2,6 +2,7 @@ package com.github.ants280.superFormula;
 
 import static com.github.ants280.superFormula.SuperformulaModel.*;
 import java.util.Random;
+import javax.swing.JComponent;
 
 public class SuperformulaController
 {
@@ -64,6 +65,10 @@ public class SuperformulaController
 
 	public void update()
 	{
+		JComponent displayComponent = view.getDisplayComponent();
+		int viewWidth = displayComponent.getWidth();
+		int viewHeight = displayComponent.getHeight();
+//		System.out.printf("\t updating view.  [w,h] = [%d,%d]%n", viewWidth, viewHeight);
 		double maxValue = 0;
 		double[] xValues = new double[NUM_POINTS];
 		double[] yValues = new double[NUM_POINTS];
@@ -84,8 +89,8 @@ public class SuperformulaController
 		double scale = (view.getSuperformulaRadius() + 0.0d) / maxValue * 0.95d;
 		for (int i = 0; i < NUM_POINTS; i++)
 		{
-			xCoords[i] = view.getWidth() / 2 + (int) Math.round(xValues[i] * scale);
-			yCoords[i] = view.getHeight() / 2 + (int) Math.round(yValues[i] * scale);
+			xCoords[i] = (int) Math.round((viewWidth / 2) + (xValues[i] * scale));
+			yCoords[i] = (int) Math.round((viewHeight / 2d) + (yValues[i] * scale));
 //			xCoords[i] = view.getWidth() / 2 + (int) (xValues[i] * scale);
 //			yCoords[i] = view.getHeight() / 2 + (int) (yValues[i] * scale);
 		}
