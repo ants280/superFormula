@@ -75,28 +75,19 @@ public class SuperformulaView
 		@Override
 		protected void paintComponent(Graphics g)
 		{
-			System.out.printf("painting: [w,h]:[%d,%d]%n", getWidth(), getHeight());
-
 			((Graphics2D) g).setRenderingHint(
 					RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
 
-			Polygon formulaPolygon = createFormulaPolygon();
-			if (formulaPolygon != null)
-			{
-				g.setColor(WIKIPEDIA_SUPERFORMULA_COLOR);
-				g.fillPolygon(formulaPolygon);
-				g.setColor(Color.BLACK);
-				g.drawPolygon(formulaPolygon);
-			}
+			Polygon formulaPolygon = this.createFormulaPolygon();
+			g.setColor(WIKIPEDIA_SUPERFORMULA_COLOR);
+			g.fillPolygon(formulaPolygon);
+			g.setColor(Color.BLACK);
+			g.drawPolygon(formulaPolygon);
 		}
 
 		private Polygon createFormulaPolygon()
 		{
-			int width = this.getWidth();
-			int height = this.getHeight();
-			System.out.printf("\t updating view.  [w,h] = [%d,%d]%n", width, height);
-
 			double maxValue = 0;
 			double[] xValues = new double[NUM_POINTS];
 			double[] yValues = new double[NUM_POINTS];
@@ -109,9 +100,10 @@ public class SuperformulaView
 				yValues[i] = r * Math.sin(phi);
 				maxValue = Math.max(maxValue, Math.abs(xValues[i]));
 				maxValue = Math.max(maxValue, Math.abs(yValues[i]));
-//			System.out.println(String.format("%3d    %7.4f    %7.4f    {%7.4f,%7.4f}", i, phi, r, xValues[i], yValues[i]));
 			}
 
+			int width = this.getWidth();
+			int height = this.getHeight();
 			int[] xCoords = new int[NUM_POINTS];
 			int[] yCoords = new int[NUM_POINTS];
 			double scale = (view.getSuperformulaRadius() + 0.0d) / maxValue * 0.95d;
@@ -119,8 +111,6 @@ public class SuperformulaView
 			{
 				xCoords[i] = (int) Math.round((width / 2) + (xValues[i] * scale));
 				yCoords[i] = (int) Math.round((height / 2d) + (yValues[i] * scale));
-//			xCoords[i] = view.getWidth() / 2 + (int) (xValues[i] * scale);
-//			yCoords[i] = view.getHeight() / 2 + (int) (yValues[i] * scale);
 			}
 
 			return new Polygon(xCoords, yCoords, xCoords.length);
