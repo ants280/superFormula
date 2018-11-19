@@ -89,7 +89,7 @@ public class SuperformulaFrame extends JFrame
 			JSlider speedSlider,
 			Timer mutatorTimer)
 	{
-		new SuperformulaUiManager(
+		SuperformulaUiManager.manage(
 				model,
 				view,
 				controller,
