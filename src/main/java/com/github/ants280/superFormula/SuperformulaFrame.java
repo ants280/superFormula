@@ -28,7 +28,7 @@ public class SuperformulaFrame extends JFrame
 {
 	private static final String MI_START = "Start changing";
 	private static final String MI_STOP = "Stop changing";
-	private static final String MI_CUSTOM_MODEL = "Add custom shape";
+	private static final String MI_CUSTOM_MODEL = "Add custom shape...";
 	private static final String MI_SHOW_DEMO = "Show demo shapes";
 	private static final String MI_SHOW_RANDOM = "Show random shapes";
 	private static final String MI_SIZE_UP = "Increase canvas size";
