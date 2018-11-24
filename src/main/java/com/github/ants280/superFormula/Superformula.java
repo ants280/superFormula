@@ -27,6 +27,9 @@ public class Superformula
 		{
 			ex.printStackTrace(System.err);
 		}
+
+		// System look and feel overrides :
+		//UIManager.getDefaults().entrySet().forEach(System.out::println);
 	}
 
 	private static void run()
