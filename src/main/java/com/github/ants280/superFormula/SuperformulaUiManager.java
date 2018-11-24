@@ -87,10 +87,11 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		this.showWikipediaDemo = false;
 	}
 
-	public static void manage(SuperformulaModel model,
+	public static void manage(
+			SuperformulaModel model,
 			SuperformulaView view,
 			SuperformulaController controller,
-			SuperformulaFrame aThis,
+			SuperformulaFrame frame,
 			JMenuItem startStopMenuItem,
 			JMenuItem showWikipediaDemoMenuItem,
 			JMenuItem customModelMenuItem,
@@ -108,7 +109,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				= new SuperformulaUiManager(model,
 						view,
 						controller,
-						aThis,
+						frame,
 						startStopMenuItem,
 						showWikipediaDemoMenuItem,
 						customModelMenuItem,
@@ -171,6 +172,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	{
 		this.updateVariablesLabel();
 		view.repaint();
+		parentComponent.pack();
 	}
 
 	@Override
