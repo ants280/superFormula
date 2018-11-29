@@ -1,4 +1,4 @@
-# superFormula
+# superformula
 A viewer for shapers created from an ellipse-like formula
 
 See https://en.wikipedia.org/wiki/Superformula
