@@ -5,7 +5,7 @@ import java.util.Random;
 
 public class SuperformulaController
 {
-	private final int CANVAS_SIZE_SCALE = 50;
+	private static final int CANVAS_SIZE_SCALE = 50;
 	private final SuperformulaModel model;
 	private final SuperformulaView view;
 	private final Random randomNumberGenerator = new Random();
@@ -92,7 +92,7 @@ public class SuperformulaController
 					break;
 				default:
 					throw new AssertionError(String.format(
-							"Unknown parameter to mutate: ",
+							"Unknown parameter to mutate: %s",
 							parameterToMutate));
 			}
 		}
