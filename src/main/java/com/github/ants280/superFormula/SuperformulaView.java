@@ -88,7 +88,7 @@ public class SuperformulaView
 
 		private Polygon createFormulaPolygon()
 		{
-			double maxValue = 0;
+			double maxValue = Double.MIN_VALUE;
 			double[] xValues = new double[NUM_POINTS];
 			double[] yValues = new double[NUM_POINTS];
 
