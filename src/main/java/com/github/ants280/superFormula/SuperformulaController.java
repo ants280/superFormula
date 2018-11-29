@@ -47,7 +47,7 @@ public class SuperformulaController
 		{
 			wikipediaDemosIndex = 0;
 			model.setParameters(
-					WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
+					WIKIPEDIA_SUPERFORMULAS.get(wikipediaDemosIndex));
 		}
 		else
 		{
@@ -66,11 +66,12 @@ public class SuperformulaController
 		if (showWikipediaDemos)
 		{
 			wikipediaDemosIndex++;
-			if (wikipediaDemosIndex == WIKIPEDIA_SUPERFORMULAS.length)
+			if (wikipediaDemosIndex == WIKIPEDIA_SUPERFORMULAS.size())
 			{
 				wikipediaDemosIndex = 0;
 			}
-			model.setParameters(WIKIPEDIA_SUPERFORMULAS[wikipediaDemosIndex]);
+			model.setParameters(
+					WIKIPEDIA_SUPERFORMULAS.get(wikipediaDemosIndex));
 		}
 		else
 		{

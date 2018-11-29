@@ -28,11 +28,6 @@ public class SuperformulaView
 		displayComponent.repaint();
 	}
 
-	private SuperformulaModel getModel()
-	{
-		return model;
-	}
-
 	public JComponent getDisplayComponent()
 	{
 		return displayComponent;
@@ -121,7 +116,7 @@ public class SuperformulaView
 
 		private double getR(double phi)
 		{
-			SuperformulaModel model = view.getModel();
+			SuperformulaModel model = view.model;
 			double bTop = Math.sin(model.getM() * phi / 4.0);
 			double aTop = Math.cos(model.getM() * phi / 4.0);
 			double x = Math.pow(Math.abs(aTop / model.getA()), model.getN2());
