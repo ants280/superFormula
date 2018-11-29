@@ -1,6 +1,8 @@
 package com.github.ants280.superFormula;
 
 import java.awt.Window;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -25,7 +27,11 @@ public class Superformula
 				| IllegalAccessException
 				| UnsupportedLookAndFeelException ex)
 		{
-			ex.printStackTrace(System.err);
+			Logger.getLogger(Superformula.class.getName())
+					.log(
+							Level.SEVERE,
+							"Could not set system Look-And-Feel",
+							ex);
 		}
 	}
 
