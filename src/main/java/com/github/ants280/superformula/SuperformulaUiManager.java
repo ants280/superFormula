@@ -1,6 +1,6 @@
-package com.github.ants280.superFormula;
+package com.github.ants280.superformula;
 
-import static com.github.ants280.superFormula.SuperformulaModel.*;
+import static com.github.ants280.superformula.SuperformulaModel.*;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

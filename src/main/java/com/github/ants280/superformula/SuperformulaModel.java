@@ -1,4 +1,4 @@
-package com.github.ants280.superFormula;
+package com.github.ants280.superformula;
 
 import java.util.Arrays;
 import java.util.Collections;
