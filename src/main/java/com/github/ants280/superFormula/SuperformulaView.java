@@ -60,7 +60,7 @@ public class SuperformulaView
 				= new Color(0xC2FEC0);
 		private static final int NUM_POINTS = 1024;
 		private static final long serialVersionUID = 1L;
-		private transient final SuperformulaView view;
+		private final transient SuperformulaView view;
 
 		public SuperformulaDisplayComponent(SuperformulaView view)
 		{
