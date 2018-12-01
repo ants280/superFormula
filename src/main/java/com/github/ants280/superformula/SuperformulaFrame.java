@@ -53,23 +53,29 @@ public class SuperformulaFrame
 
 		Timer mutatorTimer = new Timer(speedSlider.getValue(), null);
 
+		SuperformulaLabelManager superformulaLabelManager
+				= new SuperformulaLabelManager(
+						startStopMenuItem,
+						showWikipediaDemoMenuItem,
+						customModelMenuItem,
+						sizeUpMenuItem,
+						sizeDownMenuItem,
+						helpMenuItem,
+						aboutMenuItem);
+		SuperformulaButtonManager superformulaButtonManager
+				= new SuperformulaButtonManager(
+						startStopButton,
+						showWikipediaDemoButton);
 		SuperformulaUiManager superformulaUiManager
 				= new SuperformulaUiManager(
 						model,
-				view,
-				controller,
-				frame,
-				startStopMenuItem,
-				showWikipediaDemoMenuItem,
-				customModelMenuItem,
-				sizeUpMenuItem,
-				sizeDownMenuItem,
-				helpMenuItem,
-				aboutMenuItem,
-				variablesLabel,
-				startStopButton,
-				showWikipediaDemoButton,
-				speedSlider,
+						view,
+						controller,
+						frame,
+						superformulaLabelManager,
+						superformulaButtonManager,
+						variablesLabel,
+						speedSlider,
 						mutatorTimer);
 		superformulaUiManager.init();
 

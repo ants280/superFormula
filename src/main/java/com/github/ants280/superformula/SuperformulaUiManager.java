@@ -11,11 +11,9 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
@@ -28,31 +26,24 @@ import javax.swing.event.HyperlinkEvent;
 
 public class SuperformulaUiManager implements ActionListener, ChangeListener
 {
-	private static final String MI_START = "Start changing";
-	private static final String MI_STOP = "Stop changing";
-	private static final String MI_CUSTOM_MODEL = "Add custom shape...";
-	private static final String MI_SHOW_DEMO = "Show demo shapes";
-	private static final String MI_SHOW_RANDOM = "Show random shapes";
-	private static final String MI_SIZE_UP = "Increase canvas size";
-	private static final String MI_SIZE_DOWN = "Decrease canvas size";
-	private static final String MI_HELP = "Help...";
-	private static final String MI_ABOUT = "About...";
+	public static final String MI_START = "Start changing";
+	public static final String MI_STOP = "Stop changing";
+	public static final String MI_CUSTOM_MODEL = "Add custom shape...";
+	public static final String MI_SHOW_DEMO = "Show demo shapes";
+	public static final String MI_SHOW_RANDOM = "Show random shapes";
+	public static final String MI_SIZE_UP = "Increase canvas size";
+	public static final String MI_SIZE_DOWN = "Decrease canvas size";
+	public static final String MI_HELP = "Help...";
+	public static final String MI_ABOUT = "About...";
 
 	private final SuperformulaModel model;
 	private final SuperformulaView view;
 	private final SuperformulaController controller;
 
 	private final JFrame parentComponent;
-	private final JMenuItem startStopMenuItem;
-	private final JMenuItem showWikipediaDemoMenuItem;
-	private final JMenuItem customModelMenuItem;
-	private final JMenuItem sizeUpMenuItem;
-	private final JMenuItem sizeDownMenuItem;
-	private final JMenuItem helpMenuItem;
-	private final JMenuItem aboutMenuItem;
+	private final SuperformulaLabelManager superformulaLabelManager;
+	private final SuperformulaButtonManager superformulaButtonManager;
 	private final JLabel variablesLabel;
-	private final JButton startStopButton;
-	private final JButton showWikipediaDemoButton;
 	private final JSlider speedSlider;
 	private final Timer mutatorTimer;
 	private boolean showWikipediaDemo;
@@ -62,16 +53,9 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 			SuperformulaView view,
 			SuperformulaController controller,
 			JFrame parentComponent,
-			JMenuItem startStopMenuItem,
-			JMenuItem showWikipediaDemoMenuItem,
-			JMenuItem customModelMenuItem,
-			JMenuItem sizeUpMenuItem,
-			JMenuItem sizeDownMenuItem,
-			JMenuItem helpMenuItem,
-			JMenuItem aboutMenuItem,
+			SuperformulaLabelManager superformulaLabelManager,
+			SuperformulaButtonManager superformulaButtonManager,
 			JLabel variablesLabel,
-			JButton startStopButton,
-			JButton showWikipediaDemoButton,
 			JSlider speedSlider,
 			Timer mutatorTimer)
 	{
@@ -80,16 +64,9 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		this.controller = controller;
 
 		this.parentComponent = parentComponent;
-		this.startStopMenuItem = startStopMenuItem;
-		this.showWikipediaDemoMenuItem = showWikipediaDemoMenuItem;
-		this.customModelMenuItem = customModelMenuItem;
-		this.sizeUpMenuItem = sizeUpMenuItem;
-		this.sizeDownMenuItem = sizeDownMenuItem;
-		this.helpMenuItem = helpMenuItem;
-		this.aboutMenuItem = aboutMenuItem;
+		this.superformulaLabelManager = superformulaLabelManager;
+		this.superformulaButtonManager = superformulaButtonManager;
 		this.variablesLabel = variablesLabel;
-		this.startStopButton = startStopButton;
-		this.showWikipediaDemoButton = showWikipediaDemoButton;
 		this.speedSlider = speedSlider;
 
 		this.mutatorTimer = mutatorTimer;
@@ -98,37 +75,10 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 
 	public void init()
 	{
-		// MenuItems:
-		startStopMenuItem.setText(MI_START);
-		showWikipediaDemoMenuItem.setText(MI_SHOW_DEMO);
-		customModelMenuItem.setText(MI_CUSTOM_MODEL);
-		sizeUpMenuItem.setText(MI_SIZE_UP);
-		sizeDownMenuItem.setText(MI_SIZE_DOWN);
-		helpMenuItem.setText(MI_HELP);
-		aboutMenuItem.setText(MI_ABOUT);
-
-		startStopMenuItem.addActionListener(this);
-		showWikipediaDemoMenuItem.addActionListener(this);
-		customModelMenuItem.addActionListener(this);
-		sizeUpMenuItem.addActionListener(this);
-		sizeDownMenuItem.addActionListener(this);
-		helpMenuItem.addActionListener(this);
-		aboutMenuItem.addActionListener(this);
-
-		// Variables Label:
+		superformulaLabelManager.init(this);
+		superformulaButtonManager.init(this);
 		this.updateVariablesLabel();
-
-		// Buttons:
-		startStopButton.setText(MI_START);
-		showWikipediaDemoButton.setText(MI_SHOW_DEMO);
-
-		startStopButton.addActionListener(this);
-		showWikipediaDemoButton.addActionListener(this);
-
-		// Slider:
 		speedSlider.addChangeListener(this);
-
-		// Timer:
 		mutatorTimer.addActionListener(actionEvent -> this.mutate());
 	}
 
@@ -178,32 +128,19 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				if (isRunning)
 				{
 					mutatorTimer.stop();
-					startStopMenuItem.setText(MI_START);
-					startStopButton.setText(MI_START);
 				}
 				else
 				{
 					mutatorTimer.start();
-					startStopMenuItem.setText(MI_STOP);
-					startStopButton.setText(MI_STOP);
 				}
+				superformulaLabelManager.setStarted(!isRunning);
+				superformulaButtonManager.setStarted(!isRunning);
 				break;
 			case MI_SHOW_DEMO:
 			case MI_SHOW_RANDOM:
 				showWikipediaDemo = !showWikipediaDemo;
-				if (showWikipediaDemoButton != null)
-				{
-					if (showWikipediaDemo)
-					{
-						showWikipediaDemoMenuItem.setText(MI_SHOW_RANDOM);
-						showWikipediaDemoButton.setText(MI_SHOW_RANDOM);
-					}
-					else
-					{
-						showWikipediaDemoMenuItem.setText(MI_SHOW_DEMO);
-						showWikipediaDemoButton.setText(MI_SHOW_DEMO);
-					}
-				}
+				superformulaLabelManager.showWikipediaDemo(showWikipediaDemo);
+				superformulaButtonManager.showWikipediaDemo(showWikipediaDemo);
 				controller.setShowWikipediaDemos(showWikipediaDemo);
 				this.update();
 				break;
@@ -304,8 +241,8 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				JOptionPane.OK_CANCEL_OPTION);
 		if (choice == JOptionPane.OK_OPTION)
 		{
-			startStopMenuItem.setText(MI_START);
-			startStopButton.setText(MI_START);
+			superformulaLabelManager.setStarted(false);
+			superformulaButtonManager.setStarted(false);
 
 			model.setM(mSpinnerModel.getNumber().intValue());
 			model.setN1(n1SpinnerModel.getNumber().intValue());
