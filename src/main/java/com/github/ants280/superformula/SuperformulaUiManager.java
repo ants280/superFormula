@@ -2,7 +2,6 @@ package com.github.ants280.superformula;
 
 import static com.github.ants280.superformula.SuperformulaModel.*;
 import java.awt.GridLayout;
-import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -236,22 +235,22 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 					}
 				}
 				controller.setShowWikipediaDemos(showWikipediaDemo);
-				update();
+				this.update();
 				break;
 			case MI_CUSTOM_MODEL:
-				handleCustomModelCommand();
+				this.handleCustomModelCommand();
 				break;
 			case MI_SIZE_UP:
-				changeCanvasSize(1);
+				this.changeCanvasSize(1);
 				break;
 			case MI_SIZE_DOWN:
-				changeCanvasSize(-1);
+				this.changeCanvasSize(-1);
 				break;
 			case MI_HELP:
-				showHelpDialog();
+				this.showHelpDialog();
 				break;
 			case MI_ABOUT:
-				showAboutDialog();
+				this.showAboutDialog();
 				break;
 			default:
 				throw new IllegalArgumentException(String.format(
@@ -259,7 +258,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		}
 	}
 
-	private void showHelpDialog() throws HeadlessException
+	private void showHelpDialog()
 	{
 		// Blocking:
 		JOptionPane.showMessageDialog(
@@ -278,7 +277,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				JOptionPane.QUESTION_MESSAGE);
 	}
 
-	private void showAboutDialog() throws HeadlessException
+	private void showAboutDialog()
 	{
 		// Blocking:
 		JOptionPane.showMessageDialog(
