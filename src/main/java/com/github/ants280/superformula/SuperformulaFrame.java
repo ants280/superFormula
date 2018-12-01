@@ -5,7 +5,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -54,48 +53,6 @@ public class SuperformulaFrame
 
 		Timer mutatorTimer = new Timer(speedSlider.getValue(), null);
 
-		init(
-				model,
-				view,
-				controller,
-				startStopMenuItem,
-				showWikipediaDemoMenuItem,
-				customModelMenuItem,
-				sizeUpMenuItem,
-				sizeDownMenuItem,
-				helpMenuItem,
-				aboutMenuItem,
-				variablesLabel,
-				view.getDisplayComponent(),
-				startStopButton,
-				showWikipediaDemoButton,
-				speedSlider,
-				mutatorTimer);
-	}
-
-	public JFrame getFrame()
-	{
-		return frame;
-	}
-
-	private void init(
-			SuperformulaModel model,
-			SuperformulaView view,
-			SuperformulaController controller,
-			JMenuItem startStopMenuItem,
-			JMenuItem showWikipediaDemoMenuItem,
-			JMenuItem customModelMenuItem,
-			JMenuItem sizeUpMenuItem,
-			JMenuItem sizeDownMenuItem,
-			JMenuItem helpMenuItem,
-			JMenuItem aboutMenuItem,
-			JLabel variablesLabel,
-			JComponent superformulaDisplayComponent,
-			JButton startStopButton,
-			JButton showWikipediaDemoButton,
-			JSlider speedSlider,
-			Timer mutatorTimer)
-	{
 		SuperformulaUiManager.manage(
 				model,
 				view,
@@ -132,12 +89,17 @@ public class SuperformulaFrame
 
 		frame.setJMenuBar(menuBar);
 		frame.add(variablesLabel, BorderLayout.NORTH);
-		frame.add(superformulaDisplayComponent);
+		frame.add(view.getDisplayComponent());
 		frame.add(buttonPanel, BorderLayout.SOUTH);
 
 		frame.pack();
 		frame.setResizable(false);
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+	}
+
+	public JFrame getFrame()
+	{
+		return frame;
 	}
 
 	private JMenuBar createMainMenu(
