@@ -17,13 +17,13 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
-public class SuperformulaFrame extends JFrame
+public class SuperformulaFrame
 {
-	private static final long serialVersionUID = 1L;
+	private final JFrame frame;
 
 	public SuperformulaFrame()
 	{
-		super("Superformula");
+		this.frame = new JFrame("Superformula");
 
 		JMenuItem startStopMenuItem = new JMenuItem();
 		JMenuItem showWikipediaDemoMenuItem = new JMenuItem();
@@ -73,6 +73,11 @@ public class SuperformulaFrame extends JFrame
 				mutatorTimer);
 	}
 
+	public JFrame getFrame()
+	{
+		return frame;
+	}
+
 	private void init(
 			SuperformulaModel model,
 			SuperformulaView view,
@@ -95,7 +100,7 @@ public class SuperformulaFrame extends JFrame
 				model,
 				view,
 				controller,
-				this,
+				frame,
 				startStopMenuItem,
 				showWikipediaDemoMenuItem,
 				customModelMenuItem,
@@ -123,16 +128,16 @@ public class SuperformulaFrame extends JFrame
 		buttonPanel.add(showWikipediaDemoButton);
 		buttonPanel.add(speedSlider);
 
-		this.addWindowListener(new SuperformulaWindowListener(mutatorTimer));
+		frame.addWindowListener(new SuperformulaWindowListener(mutatorTimer));
 
-		this.setJMenuBar(menuBar);
-		this.add(variablesLabel, BorderLayout.NORTH);
-		this.add(superformulaDisplayComponent);
-		this.add(buttonPanel, BorderLayout.SOUTH);
+		frame.setJMenuBar(menuBar);
+		frame.add(variablesLabel, BorderLayout.NORTH);
+		frame.add(superformulaDisplayComponent);
+		frame.add(buttonPanel, BorderLayout.SOUTH);
 
-		this.pack();
-		this.setResizable(false);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		frame.pack();
+		frame.setResizable(false);
+		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 	}
 
 	private JMenuBar createMainMenu(

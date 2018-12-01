@@ -91,7 +91,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 			SuperformulaModel model,
 			SuperformulaView view,
 			SuperformulaController controller,
-			SuperformulaFrame frame,
+			JFrame frame,
 			JMenuItem startStopMenuItem,
 			JMenuItem showWikipediaDemoMenuItem,
 			JMenuItem customModelMenuItem,
