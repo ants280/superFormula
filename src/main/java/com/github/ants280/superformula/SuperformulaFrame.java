@@ -60,7 +60,8 @@ public class SuperformulaFrame
 		SuperformulaButtonManager superformulaButtonManager
 				= new SuperformulaButtonManager(
 						startStopButton,
-						showWikipediaDemoButton);
+						showWikipediaDemoButton,
+						speedSlider);
 		SuperformulaUiManager superformulaUiManager
 				= new SuperformulaUiManager(
 						model,
@@ -69,8 +70,7 @@ public class SuperformulaFrame
 						frame,
 						superformulaLabelManager,
 						superformulaButtonManager,
-						variablesLabel,
-						speedSlider);
+						variablesLabel);
 		superformulaUiManager.init();
 
 		JMenuBar menuBar = createMainMenu(

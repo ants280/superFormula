@@ -16,7 +16,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.Timer;
@@ -44,7 +43,6 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	private final SuperformulaLabelManager superformulaLabelManager;
 	private final SuperformulaButtonManager superformulaButtonManager;
 	private final JLabel variablesLabel;
-	private final JSlider speedSlider;
 
 	private final Timer mutatorTimer;
 	private boolean showWikipediaDemo;
@@ -56,8 +54,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 			JFrame parentComponent,
 			SuperformulaLabelManager superformulaLabelManager,
 			SuperformulaButtonManager superformulaButtonManager,
-			JLabel variablesLabel,
-			JSlider speedSlider)
+			JLabel variablesLabel)
 	{
 		this.model = model;
 		this.view = view;
@@ -67,11 +64,10 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		this.superformulaLabelManager = superformulaLabelManager;
 		this.superformulaButtonManager = superformulaButtonManager;
 		this.variablesLabel = variablesLabel;
-		this.speedSlider = speedSlider;
 
-		this.mutatorTimer = new Timer(speedSlider.getValue(), null);
-		parentComponent.addWindowListener(
-				new SuperformulaWindowListener(mutatorTimer));
+		this.mutatorTimer = new Timer(
+				superformulaButtonManager.getSpeedSliderValue(),
+				null);
 
 		this.showWikipediaDemo = false;
 	}
@@ -79,10 +75,12 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	public void init()
 	{
 		superformulaLabelManager.init(this);
-		superformulaButtonManager.init(this);
+		superformulaButtonManager.init(this, this);
 		this.updateVariablesLabel();
-		speedSlider.addChangeListener(this);
+
 		mutatorTimer.addActionListener(actionEvent -> this.mutate());
+		parentComponent.addWindowListener(
+				new SuperformulaWindowListener(mutatorTimer));
 	}
 
 	private void mutate()
@@ -101,7 +99,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	@Override
 	public void stateChanged(ChangeEvent changeEvent)
 	{
-		int value = speedSlider.getValue();
+		int value = superformulaButtonManager.getSpeedSliderValue();
 		mutatorTimer.setDelay(value);
 		mutatorTimer.restart();
 	}
