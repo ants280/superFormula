@@ -45,6 +45,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 	private final SuperformulaButtonManager superformulaButtonManager;
 	private final JLabel variablesLabel;
 	private final JSlider speedSlider;
+
 	private final Timer mutatorTimer;
 	private boolean showWikipediaDemo;
 
@@ -56,8 +57,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 			SuperformulaLabelManager superformulaLabelManager,
 			SuperformulaButtonManager superformulaButtonManager,
 			JLabel variablesLabel,
-			JSlider speedSlider,
-			Timer mutatorTimer)
+			JSlider speedSlider)
 	{
 		this.model = model;
 		this.view = view;
@@ -69,7 +69,10 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		this.variablesLabel = variablesLabel;
 		this.speedSlider = speedSlider;
 
-		this.mutatorTimer = mutatorTimer;
+		this.mutatorTimer = new Timer(speedSlider.getValue(), null);
+		parentComponent.addWindowListener(
+				new SuperformulaWindowListener(mutatorTimer));
+
 		this.showWikipediaDemo = false;
 	}
 

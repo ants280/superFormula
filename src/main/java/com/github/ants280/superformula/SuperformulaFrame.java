@@ -2,8 +2,6 @@ package com.github.ants280.superformula;
 
 import java.awt.BorderLayout;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -13,7 +11,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JSlider;
 import javax.swing.SwingConstants;
-import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
 public class SuperformulaFrame
@@ -51,8 +48,6 @@ public class SuperformulaFrame
 		speedSlider.setSnapToTicks(true);
 		speedSlider.setPaintTicks(true);
 
-		Timer mutatorTimer = new Timer(speedSlider.getValue(), null);
-
 		SuperformulaLabelManager superformulaLabelManager
 				= new SuperformulaLabelManager(
 						startStopMenuItem,
@@ -75,8 +70,7 @@ public class SuperformulaFrame
 						superformulaLabelManager,
 						superformulaButtonManager,
 						variablesLabel,
-						speedSlider,
-						mutatorTimer);
+						speedSlider);
 		superformulaUiManager.init();
 
 		JMenuBar menuBar = createMainMenu(
@@ -92,8 +86,6 @@ public class SuperformulaFrame
 		buttonPanel.add(startStopButton);
 		buttonPanel.add(showWikipediaDemoButton);
 		buttonPanel.add(speedSlider);
-
-		frame.addWindowListener(new SuperformulaWindowListener(mutatorTimer));
 
 		frame.setJMenuBar(menuBar);
 		frame.add(variablesLabel, BorderLayout.NORTH);
@@ -147,21 +139,5 @@ public class SuperformulaFrame
 		mainMenu.add(helpMenu);
 
 		return mainMenu;
-	}
-
-	private static class SuperformulaWindowListener extends WindowAdapter
-	{
-		private final Timer timer;
-
-		public SuperformulaWindowListener(Timer timer)
-		{
-			this.timer = timer;
-		}
-
-		@Override
-		public void windowClosing(WindowEvent windowEvent)
-		{
-			timer.stop();
-		}
 	}
 }
