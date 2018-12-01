@@ -1,10 +1,18 @@
 package com.github.ants280.superformula;
 
 import static com.github.ants280.superformula.SuperformulaModel.*;
+import java.awt.Desktop;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenuItem;
@@ -16,6 +24,7 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.Timer;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import javax.swing.event.HyperlinkEvent;
 
 public class SuperformulaUiManager implements ActionListener, ChangeListener
 {
@@ -260,11 +269,8 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 
 	private void showHelpDialog()
 	{
-		// Blocking:
-		JOptionPane.showMessageDialog(
-				parentComponent,
-				// TODO: Link not clickable
-				"<html>"
+		String helpHtmlMessage
+				= "<html>"
 				+ "<body>"
 				+ "Check out the "
 				+ "<a href=https://en.wikipedia.org/wiki/Superformula>"
@@ -272,7 +278,15 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				+ "</a>"
 				+ " on Superformulas"
 				+ "</body>"
-				+ "</html>",
+				+ "</html>";
+		JEditorPane editorPane = new JEditorPane("text/html", helpHtmlMessage);
+		editorPane.setEditable(false);
+		editorPane.addHyperlinkListener(this::handleLinkClick);
+
+		// Blocking:
+		JOptionPane.showMessageDialog(
+				parentComponent,
+				editorPane,
 				"Help for " + parentComponent.getTitle(),
 				JOptionPane.QUESTION_MESSAGE);
 	}
@@ -341,6 +355,25 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		else if (wasRunning)
 		{
 			mutatorTimer.start();
+		}
+	}
+
+	private void handleLinkClick(HyperlinkEvent hyperlinkEvent)
+	{
+		if (HyperlinkEvent.EventType.ACTIVATED
+				.equals(hyperlinkEvent.getEventType()))
+		{
+			URL url = hyperlinkEvent.getURL();
+			try
+			{
+				URI uri = url.toURI();
+				Desktop.getDesktop().browse(uri);
+			}
+			catch (URISyntaxException | IOException ex)
+			{
+				Logger.getLogger(SuperformulaUiManager.class.getName())
+						.log(Level.SEVERE, "Problem going to url: " + url, ex);
+			}
 		}
 	}
 }
