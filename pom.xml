@@ -127,13 +127,13 @@
 			</plugin>
 		</plugins>
 	</build>
-	<!--	<dependencies>
-		<dependency>
+	<dependencies>
+<!--		<dependency>
 			 test api 
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
-		</dependency>
-	</dependencies>-->
+		</dependency>-->
+	</dependencies>
 </project>
