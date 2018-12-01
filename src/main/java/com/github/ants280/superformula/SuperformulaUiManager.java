@@ -2,6 +2,7 @@ package com.github.ants280.superformula;
 
 import static com.github.ants280.superformula.SuperformulaModel.*;
 import java.awt.GridLayout;
+import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -247,34 +248,44 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 				changeCanvasSize(-1);
 				break;
 			case MI_HELP:
-				// Blocking:
-				JOptionPane.showMessageDialog(
-						parentComponent,
-						// TODO: Link not clickable
-						"<html>"
-						+ "<body>"
-						+ "Check out the "
-						+ "<a href=https://en.wikipedia.org/wiki/Superformula>"
-						+ "Wikipedia page"
-						+ "</a>"
-						+ " on Superformulas"
-						+ "</body>"
-						+ "</html>",
-						"Help for " + parentComponent.getTitle(),
-						JOptionPane.QUESTION_MESSAGE);
+				showHelpDialog();
 				break;
 			case MI_ABOUT:
-				// Blocking:
-				JOptionPane.showMessageDialog(
-						parentComponent,
-						"By Jacob Patterson",
-						"About " + parentComponent.getTitle(),
-						JOptionPane.INFORMATION_MESSAGE);
+				showAboutDialog();
 				break;
 			default:
 				throw new IllegalArgumentException(String.format(
 						"Don't know how to handle an action of %s.", command));
 		}
+	}
+
+	private void showHelpDialog() throws HeadlessException
+	{
+		// Blocking:
+		JOptionPane.showMessageDialog(
+				parentComponent,
+				// TODO: Link not clickable
+				"<html>"
+				+ "<body>"
+				+ "Check out the "
+				+ "<a href=https://en.wikipedia.org/wiki/Superformula>"
+				+ "Wikipedia page"
+				+ "</a>"
+				+ " on Superformulas"
+				+ "</body>"
+				+ "</html>",
+				"Help for " + parentComponent.getTitle(),
+				JOptionPane.QUESTION_MESSAGE);
+	}
+
+	private void showAboutDialog() throws HeadlessException
+	{
+		// Blocking:
+		JOptionPane.showMessageDialog(
+				parentComponent,
+				"By Jacob Patterson",
+				"About " + parentComponent.getTitle(),
+				JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	private void changeCanvasSize(int delta)
