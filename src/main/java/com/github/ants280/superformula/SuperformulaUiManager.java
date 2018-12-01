@@ -96,46 +96,7 @@ public class SuperformulaUiManager implements ActionListener, ChangeListener
 		this.showWikipediaDemo = false;
 	}
 
-	public static void manage(
-			SuperformulaModel model,
-			SuperformulaView view,
-			SuperformulaController controller,
-			JFrame frame,
-			JMenuItem startStopMenuItem,
-			JMenuItem showWikipediaDemoMenuItem,
-			JMenuItem customModelMenuItem,
-			JMenuItem sizeUpMenuItem,
-			JMenuItem sizeDownMenuItem,
-			JMenuItem helpMenuItem,
-			JMenuItem aboutMenuItem,
-			JLabel variablesLabel,
-			JButton startStopButton,
-			JButton showWikipediaDemoButton,
-			JSlider speedSlider,
-			Timer mutatorTimer)
-	{
-		SuperformulaUiManager superformulaUiManager
-				= new SuperformulaUiManager(model,
-						view,
-						controller,
-						frame,
-						startStopMenuItem,
-						showWikipediaDemoMenuItem,
-						customModelMenuItem,
-						sizeUpMenuItem,
-						sizeDownMenuItem,
-						helpMenuItem,
-						aboutMenuItem,
-						variablesLabel,
-						startStopButton,
-						showWikipediaDemoButton,
-						speedSlider,
-						mutatorTimer);
-
-		superformulaUiManager.init();
-	}
-
-	private void init()
+	public void init()
 	{
 		// MenuItems:
 		startStopMenuItem.setText(MI_START);

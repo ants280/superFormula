@@ -53,8 +53,9 @@ public class SuperformulaFrame
 
 		Timer mutatorTimer = new Timer(speedSlider.getValue(), null);
 
-		SuperformulaUiManager.manage(
-				model,
+		SuperformulaUiManager superformulaUiManager
+				= new SuperformulaUiManager(
+						model,
 				view,
 				controller,
 				frame,
@@ -69,7 +70,8 @@ public class SuperformulaFrame
 				startStopButton,
 				showWikipediaDemoButton,
 				speedSlider,
-				mutatorTimer);
+						mutatorTimer);
+		superformulaUiManager.init();
 
 		JMenuBar menuBar = createMainMenu(
 				startStopMenuItem,
