@@ -106,9 +106,9 @@ public class SuperformulaView
 			for (int i = 0; i < NUM_POINTS; i++)
 			{
 				xCoords[i] = (int) Math.round(
-						(width / 2d) + (xValues[i] * scale));
+						width / 2d + xValues[i] * scale);
 				yCoords[i] = (int) Math.round(
-						(height / 2d) + (yValues[i] * scale));
+						height / 2d + yValues[i] * scale);
 			}
 
 			return new Polygon(xCoords, yCoords, xCoords.length);
