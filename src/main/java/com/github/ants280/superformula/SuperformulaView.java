@@ -97,18 +97,16 @@ public class SuperformulaView
 				maxValue = Math.max(maxValue, Math.abs(yValues[i]));
 			}
 
-			int width = this.getWidth();
-			int height = this.getHeight();
+			double halfWidth = this.getWidth() / 2d;
+			double halfHeight = this.getHeight() / 2d;
 			int[] xCoords = new int[NUM_POINTS];
 			int[] yCoords = new int[NUM_POINTS];
 			double scale = ((view.getSuperformulaRadius() + 0.0d) / maxValue)
 					* 0.95d;
 			for (int i = 0; i < NUM_POINTS; i++)
 			{
-				xCoords[i] = (int) Math.round(
-						width / 2d + xValues[i] * scale);
-				yCoords[i] = (int) Math.round(
-						height / 2d + yValues[i] * scale);
+				xCoords[i] = (int) Math.round(xValues[i] * scale + halfWidth);
+				yCoords[i] = (int) Math.round(yValues[i] * scale + halfHeight);
 			}
 
 			return new Polygon(xCoords, yCoords, xCoords.length);
